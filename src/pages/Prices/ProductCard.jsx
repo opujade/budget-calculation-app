@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useTotalPriceContext, useAddPriceContext } from '../../context/TotalPriceProvider';
+import { useAddPriceContext } from '../../context/TotalPriceProvider';
 
 export const ProductCard = (props) => {
-  const totalPrice = useTotalPriceContext();
   const addPrice = useAddPriceContext();
   // TODO Estado booleano para los checkboxes dentro de los componentes
   const [checked, setChecked] = useState(false);
