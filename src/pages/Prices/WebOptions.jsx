@@ -1,35 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const WebOptions = ({ options, addExtraPrice }) => {
   const [amount, setAmount] = useState(0);
-  const [add, setAdd] = useState(false);
 
-  const addAmount = () => {
-    setAmount(amount + 1);
-    setAdd(true)
+  const addAmount = async () => {
+    let newAmount = amount + 1;
+    setAmount(newAmount);
+    addExtraPrice(true, newAmount)
+    console.log(newAmount)
   };
 
   const removeAmount = () => {
     if (amount > 0) {
-      setAmount(amount - 1);
-      setAdd(false)
+      let newAmount = amount - 1;
+      setAmount(newAmount);
+      addExtraPrice(false, newAmount);
+      console.log(newAmount)
     }
   };
-
-  useEffect(() => {
-    addExtraPrice(add);
-  }, [add]);
 
   return (
     <div>
       <span className="label-text uppercase" htmlFor={options}>
         Nombre de {options}
       </span>
-      <button className="btn" onClick={removeAmount}>
+      <button className="" onClick={removeAmount}>
         -
       </button>
       <input readOnly value={amount} name={options}></input>
-      <button className="btn" onClick={addAmount}>
+      <button className="" onClick={addAmount}>
         +
       </button>
     </div>

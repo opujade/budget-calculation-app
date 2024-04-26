@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
-import { useAddPriceContext } from '../../context/TotalPriceProvider';
+import { useTotalPriceContext, useAddPriceContext } from '../../context/TotalPriceProvider';
 import { WebOptions } from './WebOptions';
 import extraOptions from '../../data/extraOptions';
 
 export const ProductCard = (props) => {
   const addPrice = useAddPriceContext();
+  const totalPrice = useTotalPriceContext();
   const [checked, setChecked] = useState(false);
   const [extraPrice, setExtraPrice] = useState(0);
 
-  const addExtraPrice = (add) => {
+  const addExtraPrice = (add, amount) => {
     if (add) {
-      setExtraPrice(extraPrice + 1);
+      let newExtraPrice = amount * 30
+      setExtraPrice(newExtraPrice);
+      addPrice(30)
+      console.log(newExtraPrice)
     } else if (extraPrice > 0) {
-      setExtraPrice(extraPrice - 1);
+      let newExtraPrice = amount * 30
+      setExtraPrice(newExtraPrice);
+      addPrice(- 30)
+      console.log(newExtraPrice)
     }
-    addPrice(extraPrice * 30);
-    console.log(extraPrice);
   };
 
   const handleCheck = () => {
