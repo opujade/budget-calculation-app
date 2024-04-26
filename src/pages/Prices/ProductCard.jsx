@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { useAddPriceContext } from '../../context/TotalPriceProvider';
+import { WebOptions } from './WebOptions';
+import extraOptions from '../../data/extraOptions';
 
 export const ProductCard = (props) => {
   const addPrice = useAddPriceContext();
-  // TODO Estado booleano para los checkboxes dentro de los componentes
   const [checked, setChecked] = useState(false);
+  const [extraPrice, setExtraPrice] = useState(0);
 
-  // TODO Handle checked function
+  const addExtraPrice = (add) => {
+    if (add) {
+      setExtraPrice(extraPrice + 1);
+    } else if (extraPrice > 0) {
+      setExtraPrice(extraPrice - 1);
+    }
+    addPrice(extraPrice * 30);
+    console.log(extraPrice);
+  };
+
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) {
@@ -18,16 +29,15 @@ export const ProductCard = (props) => {
 
   return (
     <>
-      {/* TODO 3 Checkboxes que añaden X cantidad al presupuesto. */}
-      <div className="m-8 border-2 border-solid border-slate-500 rounded-lg">
+      <div className="m-8 border-2 border-solid border-secondary rounded-lg">
         <h3 className="menu-title text-xl">{props.product.title}</h3>
         <p>{props.product.description}</p>
         <div className="font-bold p-3 text-lg">{props.product.price}</div>
 
-        <div className='form-control mx-auto'>
+        <div className="form-control mx-auto">
           <label className="label cursor-pointer justify-center gap-2">
             <input
-              className="checkbox"
+              className="checkbox checkbox-xs"
               name={props.product.id}
               type="checkbox"
               onChange={handleCheck}
@@ -36,6 +46,16 @@ export const ProductCard = (props) => {
               Afegir
             </span>
           </label>
+
+          {props.product.id === 3 &&
+            checked &&
+            extraOptions.map((option) => (
+              <WebOptions
+                key={option.name}
+                options={option.name}
+                addExtraPrice={addExtraPrice}
+              />
+            ))}
         </div>
       </div>
     </>
