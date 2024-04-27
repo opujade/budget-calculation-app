@@ -1,53 +1,50 @@
-import React, { useState } from 'react';
-import { useTotalPriceContext, useAddPriceContext } from '../../context/TotalPriceProvider';
+import React, { useState, useRef, Children } from 'react';
+import { useAddPriceContext } from '../../context/TotalPriceProvider';
 import { WebOptions } from './WebOptions';
 import extraOptions from '../../data/extraOptions';
 
 export const ProductCard = (props) => {
   const addPrice = useAddPriceContext();
-  const totalPrice = useTotalPriceContext();
   const [checked, setChecked] = useState(false);
-  const [extraPrice, setExtraPrice] = useState(0);
+  let totalProductPrice = props.product.price;
+  const extraPrice = useRef(0);
 
-  const addExtraPrice = (add, amount) => {
+  const addExtraPrice = (add) => {
     if (add) {
-      let newExtraPrice = amount * 30
-      setExtraPrice(newExtraPrice);
+      extraPrice.current += 30
       addPrice(30)
-      console.log(newExtraPrice)
-    } else if (extraPrice > 0) {
-      let newExtraPrice = amount * 30
-      setExtraPrice(newExtraPrice);
+    } else if (extraPrice.current >= 0) {
+      extraPrice.current -= 30
       addPrice(- 30)
-      console.log(newExtraPrice)
     }
   };
 
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) {
-      addPrice(props.product.price);
+      addPrice(totalProductPrice);
     } else {
-      addPrice(-props.product.price);
+      addPrice(- totalProductPrice - extraPrice.current);
+      extraPrice.current = 0;
     }
   };
 
   return (
     <>
       <div className="m-8 border-2 border-solid border-secondary rounded-lg">
-        <h3 className="menu-title text-xl">{props.product.title}</h3>
+        <h3 className="text-gray-100 text-xl">{props.product.title}</h3>
         <p>{props.product.description}</p>
         <div className="font-bold p-3 text-lg">{props.product.price}</div>
 
         <div className="form-control mx-auto">
           <label className="label cursor-pointer justify-center gap-2">
             <input
-              className="checkbox checkbox-xs"
+              className="checkbox checkbox-secondary checkbox-xs"
               name={props.product.id}
               type="checkbox"
               onChange={handleCheck}
             ></input>
-            <span className="label-text uppercase" htmlFor={props.product.id}>
+            <span className="label-text text-gray-100 uppercase" htmlFor={props.product.id}>
               Afegir
             </span>
           </label>
