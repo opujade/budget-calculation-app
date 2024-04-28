@@ -16,16 +16,16 @@ export const WebOptions = ({ options, addExtraPrice }) => {
   };
 
   return (
-    <div>
-      <span className="label-text text-gray-100 uppercase" htmlFor={options}>
-        Nombre de {options}
+    <div className='flex justify-end items-center my-5'>
+      <span className="font-semibold me-10" htmlFor={options}>
+        Número de {options}:
       </span>
-      <button className="btn btn-circle btn-secondary" onClick={removeAmount}>
-        -
+      <button className="btn btn-xs btn-circle btn-outline" onClick={removeAmount}>
+        <span className='font-bold'>-</span>
       </button>
-      <input className='input bg-slate-800' readOnly value={amount.current} name={options}></input>
-      <button className="btn btn-circle btn-secondary" onClick={addAmount}>
-        +
+      <input className='text-center w-16 border rounded-lg p-1 font-bold' readOnly value={amount.current} name={options}></input>
+      <button className="btn btn-xs btn-circle btn-outline" onClick={addAmount}>
+        <span className='font-bold'>+</span>
       </button>
     </div>
   );

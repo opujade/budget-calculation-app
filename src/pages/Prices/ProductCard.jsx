@@ -1,4 +1,4 @@
-import React, { useState, useRef, Children } from 'react';
+import React, { useState, useRef } from 'react';
 import { useAddPriceContext } from '../../context/TotalPriceProvider';
 import { WebOptions } from './WebOptions';
 import extraOptions from '../../data/extraOptions';
@@ -31,34 +31,41 @@ export const ProductCard = (props) => {
 
   return (
     <>
-      <div className="m-8 border-2 border-solid border-secondary rounded-lg">
-        <h3 className="text-gray-100 text-xl">{props.product.title}</h3>
-        <p>{props.product.description}</p>
-        <div className="font-bold p-3 text-lg">{props.product.price}</div>
+      <div className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${!checked && 'border-transparent'} ${checked && 'border-emerald-500'}`}>
+        <div className='flex items-center flex-col md:flex-row md:text-start text-center'>
 
-        <div className="form-control mx-auto">
-          <label className="label cursor-pointer justify-center gap-2">
-            <input
-              className="checkbox checkbox-secondary checkbox-xs"
-              name={props.product.id}
-              type="checkbox"
-              onChange={handleCheck}
-            ></input>
-            <span className="label-text text-gray-100 uppercase" htmlFor={props.product.id}>
-              Afegir
-            </span>
-          </label>
+          <div className='md:w-2/5 flex flex-col justify-center items-center md:items-start'>
+            <h3 className="font-bold text-4xl md:mt-3 mt-5  md:text-start text-center">{props.product.title}</h3>
+            <p className='my-5 md:my-0 font-semibold text-xl'>{props.product.description}</p>
+          </div>
 
-          {props.product.id === 3 &&
-            checked &&
-            extraOptions.map((option) => (
-              <WebOptions
-                key={option.name}
-                options={option.name}
-                addExtraPrice={addExtraPrice}
-              />
-            ))}
+          <div className="font-extrabold w-2/5 text-center text-5xl flex justify-center items-center md:my-0 my-6"><p>{props.product.price}<span className='text-3xl md:text-2xl font-bold'> €</span></p></div>
+
+          <div className="md:my-0 mb-8 mt-3 form-control mx-auto">
+            <label className="label cursor-pointer justify-center gap-2">
+              <input
+                className="checkbox border-emerald-500 [--chkbg:theme(colors.emerald.500)]"
+                name={props.product.id}
+                type="checkbox"
+                onChange={handleCheck}
+              ></input>
+              <span className="font-semibold text-xl" htmlFor={props.product.id}>
+                Afegir
+              </span>
+            </label>
+          </div>
         </div>
+
+        {props.product.id === 3 &&
+          checked &&
+          extraOptions.map((option) => (
+            <WebOptions
+              key={option.name}
+              options={option.name}
+              addExtraPrice={addExtraPrice}
+            />
+          ))}
+
       </div>
     </>
   );
