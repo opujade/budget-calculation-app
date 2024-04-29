@@ -16,15 +16,15 @@ export const WebOptions = ({ options, addExtraPrice }) => {
   };
 
   return (
-    <div className='flex justify-end items-center my-5'>
-      <span className="font-semibold me-10" htmlFor={options}>
+    <div className='flex justify-center md:justify-end items-center my-5'>
+      <span className="font-semibold md:me-10 text-center md:text-start" htmlFor={options}>
         Número de {options}:
       </span>
-      <button className="btn btn-xs btn-circle btn-outline" onClick={removeAmount}>
+      <button className="mx-1 btn btn-success btn-xs btn-circle btn-outline" onClick={removeAmount}>
         <span className='font-bold'>-</span>
       </button>
       <input className='text-center w-16 border rounded-lg p-1 font-bold' readOnly value={amount.current} name={options}></input>
-      <button className="btn btn-xs btn-circle btn-outline" onClick={addAmount}>
+      <button className="mx-1 btn btn-success btn-xs btn-circle btn-outline" onClick={addAmount}>
         <span className='font-bold'>+</span>
       </button>
     </div>
