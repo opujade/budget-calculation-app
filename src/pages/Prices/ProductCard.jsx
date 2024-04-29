@@ -35,7 +35,7 @@ export const ProductCard = (props) => {
         <div className='flex items-center flex-col md:flex-row md:text-start text-center'>
 
           <div className='md:w-2/5 flex flex-col justify-center items-center md:items-start'>
-            <h3 className="font-bold text-4xl md:mt-3 mt-5  md:text-start text-center">{props.product.title}</h3>
+            <h3 className="font-bold text-4xl md:mt-3 mt-5 md:text-start text-center">{props.product.title}</h3>
             <p className='my-5 md:my-0 font-semibold text-xl'>{props.product.description}</p>
           </div>
 

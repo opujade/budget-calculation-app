@@ -1,6 +1,6 @@
 import { useTotalPriceContext } from '../../context/TotalPriceProvider';
 
-export const Footer = () => {
+export const Pricing = () => {
   const totalPrice = useTotalPriceContext();
 
   return (
