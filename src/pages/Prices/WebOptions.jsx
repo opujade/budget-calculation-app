@@ -1,29 +1,26 @@
-import { useRef } from 'react';
+export const WebOptions = ({ options, amount, index, addExtraPrice }) => {
 
-export const WebOptions = ({ options, addExtraPrice }) => {
-  const amount = useRef(0)
-
-  const addAmount = async () => {
-    amount.current += 1;
-    addExtraPrice(true)
+  const addAmount = () => {
+    amount[index] += 1;
+    addExtraPrice(true, options.price)
   };
 
   const removeAmount = () => {
-    if (amount.current > 0) {
-      amount.current -= 1;
-      addExtraPrice(false);
+    if (amount[index] > 0) {
+      amount[index] -= 1;
+      addExtraPrice(false, options.price);
     }
   };
 
   return (
     <div className='flex justify-center md:justify-end items-center my-5'>
       <span className="font-semibold md:me-10 text-center md:text-start" htmlFor={options}>
-        Número de {options}:
+        Número de {options.name}:
       </span>
       <button className="mx-1 btn btn-success btn-xs btn-circle btn-outline" onClick={removeAmount}>
         <span className='font-bold'>-</span>
       </button>
-      <input className='text-center w-16 border rounded-lg p-1 font-bold' readOnly value={amount.current} name={options}></input>
+      <input className='text-center w-16 border rounded-lg p-1 font-bold' readOnly value={amount[index]} name={options}></input>
       <button className="mx-1 btn btn-success btn-xs btn-circle btn-outline" onClick={addAmount}>
         <span className='font-bold'>+</span>
       </button>

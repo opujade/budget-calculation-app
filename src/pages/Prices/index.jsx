@@ -13,9 +13,7 @@ export const Prices = () => {
         
         <Header />
 
-        {products.map((product) => {
-          return <ProductCard product={product} key={product.id} />;
-        })}
+        {products.map((product) => <ProductCard product={product} key={product.id} />)}
 
         <Pricing />
 

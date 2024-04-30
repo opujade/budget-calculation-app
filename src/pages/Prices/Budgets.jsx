@@ -1,39 +1,48 @@
 import { useState } from 'react';
 import { UserBudget } from './UserBudget';
+import {
+  useAddUsersContext,
+  useNewUserContext,
+  useUsersContext,
+  useUpdateNewUserContext,
+} from '../../context/UsersProvider';
 
 export const Budgets = () => {
-  const [userInfo, setUserInfo] = useState({
-    nom: '',
-    tel: '',
-    email: '',
-  });
-  const [users, setUsers] = useState([]);
+  const users = useUsersContext();
+  const updateNewUser = useUpdateNewUserContext();
+  const newUser = useNewUserContext();
+  const addUser = useAddUsersContext();
+  const [userBox, setUserBox] = useState(
+    <p>No hi ha cap pressupost en curs.</p>
+  );
 
   const onNameChange = (e) => {
     let updatedInfo = { nom: e.target.value };
-    setUserInfo((userInfo) => ({ ...userInfo, ...updatedInfo }));
+    updateNewUser(updatedInfo);
   };
 
   const onTelChange = (e) => {
     let updatedInfo = { tel: e.target.value };
-    setUserInfo((userInfo) => ({ ...userInfo, ...updatedInfo }));
+    updateNewUser(updatedInfo);
   };
 
   const onEmailChange = (e) => {
     let updatedInfo = { email: e.target.value };
-    setUserInfo((userInfo) => ({ ...userInfo, ...updatedInfo }));
+    updateNewUser(updatedInfo);
+  };
+
+  const printUsers = () => {
+    return users.length ? (
+      users.map((user) => <UserBudget user={user} key={user.name} />)
+    ) : (
+      <p>No hi ha cap pressupost en curs.</p>
+    );
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let updatedUsers = [];
-    updatedUsers.push(userInfo);
-    setUsers((users) => [...users, ...updatedUsers]);
-    setUserInfo({
-      nom: '',
-      tel: '',
-      email: '',
-    });
+    addUser();
+    setUserBox(printUsers);
   };
 
   return (
@@ -48,7 +57,7 @@ export const Budgets = () => {
             type="text"
             name="nom"
             placeholder="Nom"
-            value={userInfo.nom}
+            value={newUser.nom}
             onChange={onNameChange}
           />
           <input
@@ -56,7 +65,7 @@ export const Budgets = () => {
             type="number"
             name="tel"
             placeholder="Telèfon"
-            value={userInfo.tel}
+            value={newUser.tel}
             onChange={onTelChange}
           />
           <input
@@ -64,7 +73,7 @@ export const Budgets = () => {
             type="email"
             name="email"
             placeholder="Email"
-            value={userInfo.email}
+            value={newUser.email}
             onChange={onEmailChange}
           />
           <button className="btn btn-success text-white ms-5" type="submit">
@@ -77,11 +86,7 @@ export const Budgets = () => {
         <h3 className="font-bold text-4xl md:mt-10 mt-5 mb-5 md:text-start text-center">
           Pressupostos en curs:
         </h3>
-        {users.length ? (
-          users.map((user) => <UserBudget user={user} key={user.name} />)
-        ) : (
-          <p>No hi ha cap pressupost en curs.</p>
-        )}
+        {userBox}
       </div>
     </>
   );
