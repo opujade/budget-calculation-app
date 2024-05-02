@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { WebOptions } from './WebOptions';
 import {
   useNewUserContext,
@@ -16,14 +16,21 @@ export const ProductCard = ({ product, index, checkMethods }) => {
     if (!checkMethods.isChecked(index)) {
       newUserAux.total += product.price;
       newUserAux.serveis.push(product);
+      extraPrice.current = 0;
+      let productIndex = newUserAux.serveis.indexOf(product);
+      newUserAux.serveis[productIndex].options &&
+        newUserAux.serveis[productIndex].options.forEach((option) => {
+          option.amount = 0;
+        });
       updateNewUser(newUserAux);
     } else {
       newUserAux.total += -product.price - extraPrice.current;
       extraPrice.current = 0;
       let productIndex = newUserAux.serveis.indexOf(product);
-      newUserAux.serveis[productIndex].options && newUserAux.serveis[productIndex].options.forEach(option => {
-        option.amount = 0;
-      });
+      newUserAux.serveis[productIndex].options &&
+        newUserAux.serveis[productIndex].options.forEach((option) => {
+          option.amount = 0;
+        });
       productIndex != -1 && newUserAux.serveis.splice(productIndex, 1);
       updateNewUser(newUserAux);
     }

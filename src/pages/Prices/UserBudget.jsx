@@ -10,8 +10,19 @@ export const UserBudget = ({ user }) => {
         <p className="font-bold">Serveis contractats:</p>
         <ul>
           {user.serveis.map((servei) => (
-            <p key={servei.title} className="list-disc list-item">
-              {servei.title}
+            <p key={servei.title} className="list-disc list-item font-semibold">
+              {servei.title}{' '}
+              {servei.options && (
+                <span className="font-light">
+                  (
+                  {servei.options.map((option, index) => {
+                    return `${option.amount} ${option.name}${
+                      index < servei.options.length - 1 ? ', ' : ''
+                    }`;
+                  })}
+                  )
+                </span>
+              )}
             </p>
           ))}
         </ul>

@@ -32,6 +32,7 @@ export const Prices = () => {
             key={product.id}
             index={index}
             checkMethods={checkMethods}
+            checked={checked}
           />
         ))}
 
