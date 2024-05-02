@@ -26,6 +26,23 @@ export const WebOptions = ({ option, optionIndex, product, addExtraPrice }) => {
 
   return (
     <div className="flex justify-center md:justify-end items-center my-5">
+      <button
+        className="mx-3 btn btn-xs btn-circle btn-outline"
+        onClick={() => document.getElementById(`${option.name}`).showModal()}
+      >
+        i
+      </button>
+      <dialog id={option.name} className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Número de {option.name}</h3>
+          <p className="py-4">{option.definition}</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Tanca</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       <span
         className="font-semibold md:me-10 text-center md:text-start"
         htmlFor={option}
