@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserBudget } from './UserBudget';
 import {
   useAddUsersContext,
@@ -7,7 +7,7 @@ import {
   useUpdateNewUserContext,
 } from '../../context/UsersProvider';
 
-export const Budgets = () => {
+export const Budgets = ({ checkMethods }) => {
   const users = useUsersContext();
   const updateNewUser = useUpdateNewUserContext();
   const newUser = useNewUserContext();
@@ -15,6 +15,10 @@ export const Budgets = () => {
   const [userBox, setUserBox] = useState(
     <p>No hi ha cap pressupost en curs.</p>
   );
+
+  useEffect(() => {
+    setUserBox(printUsers);
+  }, [users]);
 
   const onNameChange = (e) => {
     let updatedInfo = { nom: e.target.value };
@@ -35,14 +39,14 @@ export const Budgets = () => {
     return users.length ? (
       users.map((user) => <UserBudget user={user} key={user.name} />)
     ) : (
-      <p>No hi ha cap pressupost en curs.</p>
+      <p key={'NoBudget'}>No hi ha cap pressupost en curs.</p>
     );
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     addUser();
-    setUserBox(printUsers);
+    checkMethods.unCheckAll();
   };
 
   return (
@@ -59,6 +63,7 @@ export const Budgets = () => {
             placeholder="Nom"
             value={newUser.nom}
             onChange={onNameChange}
+            required
           />
           <input
             className="input input-bordered w-full max-w-xs"
@@ -67,6 +72,7 @@ export const Budgets = () => {
             placeholder="Telèfon"
             value={newUser.tel}
             onChange={onTelChange}
+            required
           />
           <input
             className="input input-bordered w-full max-w-xs"
@@ -75,6 +81,7 @@ export const Budgets = () => {
             placeholder="Email"
             value={newUser.email}
             onChange={onEmailChange}
+            required
           />
           <button className="btn btn-success text-white ms-5" type="submit">
             Sol·licitar pressupost

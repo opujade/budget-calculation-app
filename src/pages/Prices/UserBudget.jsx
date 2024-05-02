@@ -1,15 +1,26 @@
 export const UserBudget = ({ user }) => {
   return (
     <div className="mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl mt-8 mb-16 flex">
-      <div className="w-1/3">
+      <div className="w-2/5">
         <h3 className="font-bold text-4xl">{user.nom}</h3>
-        <p>{user.email}</p>
-        <p>{user.tel}</p>
+        <p className="mt-3">{user.email}</p>
+        <p className="mt-3">{user.tel}</p>
       </div>
-      <div className="w-1/3"></div>
-      <div className="w-1/3">
-        <p>Total:</p>
-        <p className="text-5xl font-extrabold md:ms-20">{user.total} <span className='text-3xl font-bold'>€</span></p>
+      <div className="w-2/5">
+        <p className="font-bold">Serveis contractats:</p>
+        <ul>
+          {user.serveis.map((servei) => (
+            <p key={servei.title} className="list-disc list-item">
+              {servei.title}
+            </p>
+          ))}
+        </ul>
+      </div>
+      <div className="w-1/5">
+        <p className="text-end mb-3">Total:</p>
+        <p className="text-5xl font-extrabold text-end">
+          {user.total} <span className="text-3xl font-bold">€</span>
+        </p>
       </div>
     </div>
   );

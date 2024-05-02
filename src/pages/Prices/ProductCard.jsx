@@ -1,17 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { WebOptions } from './WebOptions';
 import {
   useNewUserContext,
   useUpdateNewUserContext,
 } from '../../context/UsersProvider';
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ product, index, checkMethods }) => {
   const updateNewUser = useUpdateNewUserContext();
   const newUser = useNewUserContext();
-  const [checked, setChecked] = useState(false);
   const extraPrice = useRef(0);
-  let amount =
-    product.id === 3 ? useRef(new Array(product.options.length).fill(0)) : 0;
+
+  const handleCheck = () => {
+    checkMethods.switchChecked(index);
+    let newUserAux = newUser;
+    if (!checkMethods.isChecked(index)) {
+      newUserAux.total += product.price;
+      newUserAux.serveis.push(product);
+      updateNewUser(newUserAux);
+    } else {
+      newUserAux.total += -product.price - extraPrice.current;
+      extraPrice.current = 0;
+      let productIndex = newUserAux.serveis.indexOf(product);
+      newUserAux.serveis[productIndex].options && newUserAux.serveis[productIndex].options.forEach(option => {
+        option.amount = 0;
+      });
+      productIndex != -1 && newUserAux.serveis.splice(productIndex, 1);
+      updateNewUser(newUserAux);
+    }
+  };
 
   const addExtraPrice = (add, price) => {
     let newUserAux = newUser;
@@ -26,28 +42,14 @@ export const ProductCard = ({ product }) => {
     }
   };
 
-  const handleCheck = () => {
-    setChecked(!checked);
-    let newUserAux = newUser;
-    if (!checked) {
-      newUserAux.total += product.price;
-      newUserAux.serveis.push(product);
-      updateNewUser(newUserAux);
-    } else {
-      newUserAux.total += -product.price - extraPrice.current;
-      extraPrice.current = 0;
-      let index = newUserAux.serveis.indexOf(product);
-      index != -1 && newUserAux.serveis.splice(index, 1);
-      updateNewUser(newUserAux);
-    }
-  };
-
   return (
     <>
       <div
         className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${
-          !checked && 'border-transparent'
-        } ${checked && 'border-emerald-500'}`}
+          !checkMethods.isChecked(index)
+            ? 'border-transparent'
+            : 'border-emerald-500'
+        }`}
       >
         <div className="flex items-center flex-col md:flex-row md:text-start text-center">
           <div className="md:w-2/5 flex flex-col justify-center items-center md:items-start">
@@ -73,6 +75,7 @@ export const ProductCard = ({ product }) => {
                 name={product.id}
                 type="checkbox"
                 onChange={handleCheck}
+                checked={checkMethods.isChecked(index)}
               ></input>
               <span className="font-semibold text-xl" htmlFor={product.id}>
                 Afegir
@@ -81,14 +84,14 @@ export const ProductCard = ({ product }) => {
           </div>
         </div>
 
-        {product.id === 3 &&
-          checked &&
-          product.options.map((option, index) => (
+        {product.options &&
+          checkMethods.isChecked(index) &&
+          product.options.map((option, optionIndex) => (
             <WebOptions
               key={option.name}
-              options={option}
-              amount={amount.current}
-              index={index}
+              option={option}
+              optionIndex={optionIndex}
+              product={product}
               addExtraPrice={addExtraPrice}
             />
           ))}

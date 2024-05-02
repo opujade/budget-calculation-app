@@ -2,22 +2,13 @@ import { useState, useContext, createContext } from 'react';
 
 const usersContext = createContext();
 const addUsersContext = createContext();
-
 const newUserContext = createContext();
 const updateNewUserContext = createContext();
 
-export function useUsersContext() {
-  return useContext(usersContext);
-}
-export function useAddUsersContext() {
-  return useContext(addUsersContext);
-}
-export function useNewUserContext() {
-  return useContext(newUserContext);
-}
-export function useUpdateNewUserContext() {
-  return useContext(updateNewUserContext);
-}
+export const useUsersContext = () => useContext(usersContext);
+export const useAddUsersContext = () => useContext(addUsersContext);
+export const useNewUserContext = () => useContext(newUserContext);
+export const useUpdateNewUserContext = () => useContext(updateNewUserContext);
 
 export const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
@@ -29,14 +20,23 @@ export const UsersProvider = ({ children }) => {
     total: 0,
   });
 
+  const resetNewUser = () => {
+    setNewUser({
+      nom: '',
+      tel: '',
+      email: '',
+      serveis: [],
+      total: 0,
+    });
+  };
+
   const updateNewUser = (info) => {
     setNewUser({ ...newUser, ...info });
   };
 
   const addUsers = () => {
-    let userAux = users;
-    userAux.push(newUser);
-    setUsers(userAux);
+    setUsers([...users, newUser]);
+    resetNewUser();
   };
 
   return (
