@@ -5,6 +5,7 @@ import { NavBar } from '../../components/NavBar';
 import { Budgets } from './Budgets';
 import products from '../../data/products';
 import { useState } from 'react';
+import { PaymentOptions } from './PaymentOptions';
 
 export const Prices = () => {
   const [checked, setChecked] = useState([false, false, false]);
@@ -26,6 +27,8 @@ export const Prices = () => {
 
         <Header />
 
+        <PaymentOptions />
+
         {products.map((product, index) => (
           <ProductCard
             product={product}
@@ -37,7 +40,7 @@ export const Prices = () => {
 
         <Pricing />
 
-        <Budgets key={'budgets'} checkMethods={checkMethods}/>
+        <Budgets key={'budgets'} checkMethods={checkMethods} />
       </div>
     </>
   );

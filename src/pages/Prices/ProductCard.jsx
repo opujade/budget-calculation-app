@@ -52,11 +52,10 @@ export const ProductCard = ({ product, index, checkMethods }) => {
   return (
     <>
       <div
-        className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${
-          !checkMethods.isChecked(index)
+        className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${!checkMethods.isChecked(index)
             ? 'border-transparent'
             : 'border-emerald-500'
-        }`}
+          }`}
       >
         <div className="flex items-center flex-col md:flex-row md:text-start text-center">
           <div className="md:w-2/5 flex flex-col justify-center items-center md:items-start">
@@ -68,11 +67,14 @@ export const ProductCard = ({ product, index, checkMethods }) => {
             </p>
           </div>
 
-          <div className="font-extrabold w-2/5 text-center text-5xl flex justify-center items-center md:my-0 my-6">
-            <p>
-              {product.price}
-              <span className="text-3xl md:text-2xl font-bold"> €</span>
-            </p>
+          <div className="font-extrabold w-2/5 text-center flex justify-center items-center md:my-0 my-6">
+            <div>
+              {newUser.discount && <p className='font-semibold text-orange-400'>Ahorra un 20%</p>}
+              <p className='text-5xl'>
+                {newUser.discount ? product.price * .8 : product.price}
+                <span className="text-3xl md:text-2xl font-bold"> €</span>
+              </p>
+            </div>
           </div>
 
           <div className="md:my-0 mb-8 mt-3 form-control mx-auto">

@@ -8,7 +8,7 @@ export const Pricing = () => {
       <p className='md:text-start text-center text-4xl font-bold md:mb-0 mb-6'>
         Preu pressupostat:
       </p>
-      <p className='text-5xl font-extrabold md:ms-20'>{newUser.total} <span className='text-3xl font-bold'>€</span></p>
+      <p className='text-5xl font-extrabold md:ms-20'>{newUser.discount ? newUser.total * .8 : newUser.total} <span className='text-3xl font-bold'>€</span></p>
     </div>
   );
 };

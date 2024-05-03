@@ -202,6 +202,7 @@ export const UsersProvider = ({ children }) => {
     serveis: [],
     total: 0,
     data: '',
+    discount: false,
   });
 
   const resetNewUser = () => {
@@ -212,6 +213,7 @@ export const UsersProvider = ({ children }) => {
       serveis: [],
       total: 0,
       data: '',
+      discount: false,
     });
   };
 
@@ -223,6 +225,7 @@ export const UsersProvider = ({ children }) => {
     let newUserAux = newUser;
     const data = new Date().getTime();
     newUserAux.data = data;
+    newUserAux.discount && (newUserAux.total *= .8);
     setUsers([...users, newUserAux]);
     resetNewUser();
   };
