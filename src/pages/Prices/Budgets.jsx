@@ -93,11 +93,11 @@ export const Budgets = ({ checkMethods }) => {
 
   return (
     <>
-      <div className="mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl mt-8 mb-16">
+      <div className="mx-auto md:w-5/6 shadow-xl md:p-10 p-3 rounded-3xl mt-8 mb-16">
         <h3 className="font-bold text-4xl md:mt-3 mt-5 mb-5 md:text-start text-center">
           Demanar pressupost
         </h3>
-        <form className="flex my-5 gap-1" onSubmit={onSubmit}>
+        <form className="flex md:flex-row flex-col items-center my-5 gap-1" onSubmit={onSubmit}>
           <input
             className="input input-bordered w-full max-w-xs"
             type="text"
@@ -125,7 +125,7 @@ export const Budgets = ({ checkMethods }) => {
             onChange={onEmailChange}
             required
           />
-          <button className="btn btn-success text-white ms-5" type="submit">
+          <button className="btn btn-success text-white md:ms-5" type="submit">
             Sol·licitar pressupost
           </button>
         </form>
@@ -135,8 +135,8 @@ export const Budgets = ({ checkMethods }) => {
         <h3 className="font-bold text-4xl md:mt-10 mt-5 mb-5 md:text-start text-center">
           Pressupostos en curs:
         </h3>
-        <div className='flex justify-end'>
-          <div className="join mx-5 flex">
+        <div className='flex md:flex-row flex-col justify-center items-center gap-5 md:justify-end'>
+          <div className="join flex">
             <input
               className="input input-bordered border-e-0 join-item"
               type="text"
