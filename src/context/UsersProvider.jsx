@@ -1,19 +1,17 @@
 import { useState, useContext, createContext } from 'react';
 
 const usersContext = createContext();
-const updateUsersContext = createContext();
 const addUsersContext = createContext();
 const newUserContext = createContext();
 const updateNewUserContext = createContext();
 
 export const useUsersContext = () => useContext(usersContext);
-export const useUpdateUsersContext = () => useContext(updateUsersContext);
 export const useAddUsersContext = () => useContext(addUsersContext);
 export const useNewUserContext = () => useContext(newUserContext);
 export const useUpdateNewUserContext = () => useContext(updateNewUserContext);
 
 export const UsersProvider = ({ children }) => {
-  const [users, setUsers] = useState([{
+  const [users, setUsers] = useState([/* {
     "nom": "Oriol",
     "tel": "123123123",
     "email": "oriol@oriol.com",
@@ -195,7 +193,7 @@ export const UsersProvider = ({ children }) => {
     ],
     "total": 1130,
     "data": 1714747637544,
-  }
+  } */
   ]);
   const [newUser, setNewUser] = useState({
     nom: '',
@@ -229,22 +227,17 @@ export const UsersProvider = ({ children }) => {
     resetNewUser();
   };
 
-  const updateUsers = (usersAux) => {
-    setUsers([...usersAux]);
-  }
 
   return (
     <>
       <usersContext.Provider value={users}>
-        <updateUsersContext.Provider value={updateUsers}>
-          <addUsersContext.Provider value={addUsers}>
-            <newUserContext.Provider value={newUser}>
-              <updateNewUserContext.Provider value={updateNewUser}>
-                {children}
-              </updateNewUserContext.Provider>
-            </newUserContext.Provider>
-          </addUsersContext.Provider>
-        </updateUsersContext.Provider>
+        <addUsersContext.Provider value={addUsers}>
+          <newUserContext.Provider value={newUser}>
+            <updateNewUserContext.Provider value={updateNewUser}>
+              {children}
+            </updateNewUserContext.Provider>
+          </newUserContext.Provider>
+        </addUsersContext.Provider>
       </usersContext.Provider>
     </>
   );

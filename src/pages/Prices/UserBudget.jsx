@@ -1,6 +1,6 @@
 export const UserBudget = ({ user }) => {
   return (
-    <div className="mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl mt-8 mb-16 flex">
+    <li className="mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl mt-8 mb-16 flex">
       <div className="w-2/5">
         <h3 className="font-bold text-4xl">{user.nom}</h3>
         <p className="mt-3">{user.email}</p>
@@ -33,6 +33,6 @@ export const UserBudget = ({ user }) => {
           {user.total} <span className="text-3xl font-bold">€</span>
         </p>
       </div>
-    </div>
+    </li>
   );
 };
