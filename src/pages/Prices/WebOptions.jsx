@@ -19,9 +19,11 @@ export const WebOptions = ({ option, optionIndex, product, addExtraPrice }) => {
 
   const removeAmount = () => {
     let newUserAux = newUser;
-    newUserAux.serveis[productUserIndex].options[optionIndex].amount -= 1;
-    updateNewUser(newUserAux);
-    addExtraPrice(false, option.price);
+    if (newUserAux.serveis[productUserIndex].options[optionIndex].amount > 0) {
+      newUserAux.serveis[productUserIndex].options[optionIndex].amount -= 1;
+      updateNewUser(newUserAux);
+      addExtraPrice(false, option.price);
+    }
   };
 
   return (
