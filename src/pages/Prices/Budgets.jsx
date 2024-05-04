@@ -97,7 +97,7 @@ export const Budgets = ({ checkMethods }) => {
         <h3 className="font-bold text-4xl md:mt-3 mt-5 mb-5 md:text-start text-center">
           Demanar pressupost
         </h3>
-        <form className="flex md:flex-row flex-col items-center my-5 gap-1" onSubmit={onSubmit}>
+        <form className="flex md:flex-row flex-col items-center my-5 gap-1 relative" onSubmit={onSubmit}>
           <input
             className="input input-bordered w-full max-w-xs"
             type="text"
@@ -106,7 +106,7 @@ export const Budgets = ({ checkMethods }) => {
             value={newUser.nom}
             onChange={onNameChange}
             required
-          />
+          />        
           <input
             className="input input-bordered w-full max-w-xs"
             type="number"
