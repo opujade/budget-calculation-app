@@ -9,7 +9,9 @@ import { PaymentOptions } from './PaymentOptions';
 import { OnCourseBudgets } from './OnCourseBudgets';
 
 export const Prices = () => {
-  const [checked, setChecked] = useState([false, false, false]);
+  const [checked, setChecked] = useState(
+    new Array(products.length).fill(false)
+  );
 
   const checkMethods = {
     isChecked: (index) => checked[index],
@@ -18,7 +20,7 @@ export const Prices = () => {
       checkedAux[index] = !checked[index];
       setChecked(checkedAux);
     },
-    unCheckAll: () => setChecked([false, false, false]),
+    unCheckAll: () => setChecked(new Array(products.length).fill(false)),
   };
 
   return (
