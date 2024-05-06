@@ -25,7 +25,7 @@ export const Prices = () => {
 
   return (
     <>
-      <div className="w-3/4 mx-auto">
+      <div className="w-3/4 mx-auto relative">
         <NavBar></NavBar>
 
         <Header />

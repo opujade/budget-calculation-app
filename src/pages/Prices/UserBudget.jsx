@@ -52,11 +52,9 @@ export const UserBudget = ({ user }) => {
       </div>
       <div className="md:w-1/5 mt-4 mb-8">
         <p className="mb-3">Total:</p>
-        <p className="indicator text-5xl font-extrabold">
+        <p className="text-5xl font-extrabold">
           {user.total}{' '}
-          <span className="indicator-item indicator-bottom translate-y-0 translate-x-5 text-lg font-semibold">
-            €
-          </span>
+          <span className="translate-x-5 text-lg font-semibold">€</span>
         </p>
       </div>
     </li>

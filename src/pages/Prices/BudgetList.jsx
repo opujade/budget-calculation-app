@@ -13,7 +13,7 @@ export const BudgetList = ({ search, users }) => {
           <UserBudget key={index} user={user}></UserBudget>
         ))
       ) : (
-        <li>No hi ha cap pressupost.</li>
+        <li className='my-5'>No hi ha cap pressupost.</li>
       )}
     </ul>
   );

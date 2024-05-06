@@ -81,11 +81,9 @@ export const ProductCard = ({ product, index, checkMethods }) => {
               {newUser.discount && (
                 <p className="font-semibold text-orange-400">Ahorra un 20%</p>
               )}
-              <p className="indicator text-5xl">
+              <p className="text-5xl">
                 {newUser.discount ? product.price * 0.8 : product.price}
-                <span className="indicator-item indicator-bottom translate-y-0 translate-x-5 text-lg font-semibold">
-                  €
-                </span>
+                <span className="translate-x-5 text-lg font-semibold">€</span>
               </p>
             </div>
           </div>
