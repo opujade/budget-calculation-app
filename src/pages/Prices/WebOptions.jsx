@@ -7,18 +7,18 @@ export const WebOptions = ({ option, optionIndex, product, addExtraPrice }) => {
   const newUser = useNewUserContext();
   const updateNewUser = useUpdateNewUserContext();
   let productUserIndex = newUser.serveis.findIndex(
-    (servei) => servei === product
+    (servei) => servei.id === product.id
   );
 
   const addAmount = () => {
-    let newUserAux = newUser;
+    let newUserAux = { ...newUser };
     newUserAux.serveis[productUserIndex].options[optionIndex].amount += 1;
     updateNewUser(newUserAux);
     addExtraPrice(true, option.price);
   };
 
   const removeAmount = () => {
-    let newUserAux = newUser;
+    let newUserAux = { ...newUser };
     if (newUserAux.serveis[productUserIndex].options[optionIndex].amount > 0) {
       newUserAux.serveis[productUserIndex].options[optionIndex].amount -= 1;
       updateNewUser(newUserAux);
@@ -32,7 +32,19 @@ export const WebOptions = ({ option, optionIndex, product, addExtraPrice }) => {
         className="mx-3"
         onClick={() => document.getElementById(`${option.name}`).showModal()}
       >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-black shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="stroke-black shrink-0 w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
       </button>
       <dialog id={option.name} className="modal">
         <div className="modal-box">

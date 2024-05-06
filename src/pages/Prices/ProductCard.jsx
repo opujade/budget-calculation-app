@@ -15,9 +15,15 @@ export const ProductCard = ({ product, index, checkMethods }) => {
     let newUserAux = newUser;
     if (!checkMethods.isChecked(index)) {
       newUserAux.total += product.price;
-      newUserAux.serveis.push(product);
+      newUserAux.serveis.push(
+        product.options
+          ? { ...product, options: product.options.map((e) => ({ ...e })) }
+          : { ...product }
+      );
       extraPrice.current = 0;
-      let productIndex = newUserAux.serveis.indexOf(product);
+      let productIndex = newUserAux.serveis.findIndex(
+        (servei) => servei.id === product.id
+      );
       newUserAux.serveis[productIndex].options &&
         newUserAux.serveis[productIndex].options.forEach((option) => {
           option.amount = 0;
@@ -26,7 +32,9 @@ export const ProductCard = ({ product, index, checkMethods }) => {
     } else {
       newUserAux.total += -product.price - extraPrice.current;
       extraPrice.current = 0;
-      let productIndex = newUserAux.serveis.indexOf(product);
+      let productIndex = newUserAux.serveis.findIndex(
+        (servei) => servei.id === product.id
+      );
       newUserAux.serveis[productIndex].options &&
         newUserAux.serveis[productIndex].options.forEach((option) => {
           option.amount = 0;
@@ -37,7 +45,7 @@ export const ProductCard = ({ product, index, checkMethods }) => {
   };
 
   const addExtraPrice = (add, price) => {
-    let newUserAux = newUser;
+    let newUserAux = { ...newUser };
     if (add) {
       extraPrice.current += price;
       newUserAux.total += price;
@@ -52,10 +60,11 @@ export const ProductCard = ({ product, index, checkMethods }) => {
   return (
     <>
       <div
-        className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${!checkMethods.isChecked(index)
+        className={`mx-auto md:w-5/6 shadow-xl md:p-10 rounded-3xl my-8 border duration-500 ${
+          !checkMethods.isChecked(index)
             ? 'border-transparent'
             : 'border-emerald-500'
-          }`}
+        }`}
       >
         <div className="flex items-center flex-col md:flex-row md:text-start text-center">
           <div className="md:w-2/5 flex flex-col justify-center items-center md:items-start">
@@ -69,9 +78,11 @@ export const ProductCard = ({ product, index, checkMethods }) => {
 
           <div className="font-extrabold w-2/5 text-center flex justify-center items-center md:my-0 my-6">
             <div>
-              {newUser.discount && <p className='font-semibold text-orange-400'>Ahorra un 20%</p>}
-              <p className='text-5xl'>
-                {newUser.discount ? product.price * .8 : product.price}
+              {newUser.discount && (
+                <p className="font-semibold text-orange-400">Ahorra un 20%</p>
+              )}
+              <p className="text-5xl">
+                {newUser.discount ? product.price * 0.8 : product.price}
                 <span className="text-3xl md:text-2xl font-bold"> €</span>
               </p>
             </div>
