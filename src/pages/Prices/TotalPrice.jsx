@@ -1,6 +1,6 @@
 import { useNewUserContext } from '../../context/UsersProvider';
 
-export const Pricing = () => {
+export const TotalPrice = () => {
   const newUser = useNewUserContext();
 
   return (

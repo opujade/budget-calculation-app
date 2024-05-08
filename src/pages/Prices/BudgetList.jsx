@@ -1,8 +1,6 @@
-// import { useUsersContext } from '../../context/UsersProvider';
 import { UserBudget } from './UserBudget';
 
 export const BudgetList = ({ search, users }) => {
-  // const users = useUsersContext();
   const filteredUsers = users.filter((user) =>
     search === '' ? user : user.nom.toLowerCase().includes(search.toLowerCase())
   );

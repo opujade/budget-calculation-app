@@ -1,4 +1,3 @@
-// Exportar variable en otro archivo en la carpeta /data
 import webOptionsData from "./webOptionsData";
 
 const products = [

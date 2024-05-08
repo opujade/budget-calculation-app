@@ -1,11 +1,11 @@
 import { ProductCard } from './ProductCard';
 import { Header } from './Header';
-import { Pricing } from './Pricing';
+import { TotalPrice } from './TotalPrice';
 import { NavBar } from '../../components/NavBar';
-import { Budgets } from './Budgets';
+import { RequestBudget } from './RequestBudget';
 import products from '../../data/products';
 import { useState } from 'react';
-import { PaymentOptions } from './PaymentOptions';
+import { TogglePayment } from './TogglePayment';
 import { OnCourseBudgets } from './OnCourseBudgets';
 
 export const Prices = () => {
@@ -30,7 +30,7 @@ export const Prices = () => {
 
         <Header />
 
-        <PaymentOptions />
+        <TogglePayment />
 
         {products.map((product, index) => (
           <ProductCard
@@ -41,9 +41,9 @@ export const Prices = () => {
           />
         ))}
 
-        <Pricing />
+        <TotalPrice />
 
-        <Budgets checkMethods={checkMethods} />
+        <RequestBudget checkMethods={checkMethods} />
 
         <OnCourseBudgets />
       </div>

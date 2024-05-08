@@ -1,6 +1,6 @@
 import { useNewUserContext, useUpdateNewUserContext } from "../../context/UsersProvider";
 
-export const PaymentOptions = () => {
+export const TogglePayment = () => {
     const newUser = useNewUserContext();
     const updateNewUser = useUpdateNewUserContext();
 

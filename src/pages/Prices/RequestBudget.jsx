@@ -1,14 +1,10 @@
-import { useState } from 'react';
 import {
   useAddUsersContext,
   useNewUserContext,
-  useUsersContext,
   useUpdateNewUserContext,
 } from '../../context/UsersProvider';
 
-export const Budgets = ({ checkMethods }) => {
-  const users = useUsersContext();
-  const [usersAux, setUsersAux] = useState([...users]);
+export const RequestBudget = ({ checkMethods }) => {
   const updateNewUser = useUpdateNewUserContext();
   const newUser = useNewUserContext();
   const addUser = useAddUsersContext();
