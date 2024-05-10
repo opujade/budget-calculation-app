@@ -1,4 +1,5 @@
-// Exportar variable en otro archivo en la carpeta /data
+import webOptionsData from "./webOptionsData";
+
 const products = [
   {
     title: 'Seo',
@@ -17,6 +18,7 @@ const products = [
     description: "Programació d'una web responsive completa",
     price: 500,
     id: 3,
+    options: webOptionsData,
   },
 ];
 
